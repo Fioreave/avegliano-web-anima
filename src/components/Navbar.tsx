@@ -2,6 +2,7 @@
 import { useState, useEffect } from "react";
 import { useLanguage } from "@/contexts/LanguageContext";
 import LanguageSwitcher from "./LanguageSwitcher";
+import ThemeSwitcher from "./ThemeSwitcher";
 import { Menu, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
@@ -63,6 +64,12 @@ const Navbar = () => {
             {t("about")}
           </a>
           <a
+            onClick={() => scrollToSection("services")}
+            className="nav-item text-sm font-medium cursor-pointer"
+          >
+            {t("services")}
+          </a>
+          <a
             onClick={() => scrollToSection("education")}
             className="nav-item text-sm font-medium cursor-pointer"
           >
@@ -81,12 +88,16 @@ const Navbar = () => {
             {t("contact")}
           </a>
           
-          <LanguageSwitcher />
+          <div className="flex items-center gap-2">
+            <LanguageSwitcher />
+            <ThemeSwitcher />
+          </div>
         </nav>
 
         {/* Mobile Menu Button */}
         <div className="flex items-center md:hidden">
           <LanguageSwitcher />
+          <ThemeSwitcher />
           <Button
             variant="ghost"
             size="icon"
@@ -113,6 +124,12 @@ const Navbar = () => {
               className="text-base font-medium cursor-pointer"
             >
               {t("about")}
+            </a>
+            <a
+              onClick={() => scrollToSection("services")}
+              className="text-base font-medium cursor-pointer"
+            >
+              {t("services")}
             </a>
             <a
               onClick={() => scrollToSection("education")}
