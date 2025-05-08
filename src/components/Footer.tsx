@@ -1,9 +1,151 @@
-
+import { useState, useEffect } from "react";
 import { useLanguage } from "@/contexts/LanguageContext";
-import { Heart, MoveUp } from "lucide-react";
-import { useEffect, useState } from "react";
+import { FaGithub, FaLinkedin, FaBehance, FaInstagram } from "react-icons/fa";
+import { MoveUp, Heart } from "lucide-react";
 
 const Footer = () => {
+  const { t } = useLanguage();
+  const currentYear = new Date().getFullYear();
+  const [isVisible, setIsVisible] = useState(false);
+
+  const scrollToTop = () => {
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
+  };
+
+  useEffect(() => {
+    setIsVisible(true);
+  }, []);
+
+  const icons = {
+    github: <FaGithub className="w-5 h-5" />,
+    linkedin: <FaLinkedin className="w-5 h-5" />,
+    behance: <FaBehance className="w-5 h-5" />,
+    instagram: <FaInstagram className="w-5 h-5" />,
+  };
+
+  return (
+    <footer className="bg-white dark:bg-portfolio-deep-blue py-12 border-t border-gray-200 dark:border-gray-800 relative overflow-hidden">
+      {/* Animated background elements */}
+      <div className="absolute -top-24 left-1/4 w-40 h-40 rounded-full bg-portfolio-purple/5 blur-2xl"></div>
+      <div className="absolute -bottom-20 right-1/4 w-60 h-60 rounded-full bg-portfolio-purple/10 blur-3xl"></div>
+
+      <div className="container mx-auto px-4 relative z-10">
+        <div className="flex flex-col items-center justify-center">
+          {/* Título */}
+          <div className="font-display text-2xl font-bold text-portfolio-deep-blue dark:text-white mb-6 transform transition-all duration-500 hover:scale-110">
+            <span
+              className={`inline-block transition-all duration-500 ${
+                isVisible
+                  ? "opacity-100 transform-none"
+                  : "opacity-0 -translate-y-4"
+              }`}
+            >
+              Fiorella<span className="text-portfolio-purple">.</span>
+            </span>
+          </div>
+
+          {/* Íconos sociales */}
+          {/*<div className="flex space-x-6 mb-8">
+            {["linkedin", "behance", "github", "instagram"].map(
+              (social, index) => (
+                <a
+                  key={social}
+                  href="#"
+                  className={`w-10 h-10 rounded-full bg-portfolio-light-purple dark:bg-portfolio-purple/20 flex items-center justify-center text-portfolio-purple transition-all duration-500 hover:bg-portfolio-purple hover:text-white ${
+                    isVisible
+                      ? "opacity-100 transform-none"
+                      : "opacity-0 translate-y-4"
+                  }`}
+                  style={{ transitionDelay: `${index * 100 + 100}ms` }}
+                  aria-label={social}
+                >
+                  <span className="sr-only">{social}</span>
+                  {icons[social]}
+                </a>
+              )
+            )}
+          </div>*/}
+          <div className="flex space-x-6 mb-8">
+            {["linkedin", "behance", "github", "instagram"].map(
+              (social, index) => {
+                const urls = {
+                  linkedin:
+                    "https://www.linkedin.com/in/fiorella-avegliano-277a92198/",
+                  behance: "https://www.behance.net/fiorellaveglia",
+                  github: "https://github.com/Fioreave",
+                  instagram: "https://www.instagram.com/fiore_ave/",
+                };
+
+                return (
+                  <a
+                    key={social}
+                    href={urls[social]} // <--- Aquí insertas el enlace real
+                    className={`w-10 h-10 rounded-full bg-portfolio-light-purple dark:bg-portfolio-purple/20 flex items-center justify-center text-portfolio-purple transition-all duration-500 hover:bg-portfolio-purple hover:text-white ${
+                      isVisible
+                        ? "opacity-100 transform-none"
+                        : "opacity-0 translate-y-4"
+                    }`}
+                    style={{ transitionDelay: `${index * 100 + 100}ms` }}
+                    aria-label={social}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    <span className="sr-only">{social}</span>
+                    {icons[social]}
+                  </a>
+                );
+              }
+            )}
+          </div>
+
+          {/* Derechos reservados */}
+          <div
+            className={`flex items-center text-sm text-gray-600 dark:text-gray-300 mb-3 transition-all duration-500 ${
+              isVisible
+                ? "opacity-100 transform-none"
+                : "opacity-0 translate-y-4"
+            }`}
+            style={{ transitionDelay: "500ms" }}
+          >
+            <span>
+              © {currentYear} Fiorella Avegliano. {t("footerRights")}
+            </span>
+          </div>
+
+          {/* Diseñado por */}
+          <div
+            className={`flex items-center text-xs text-gray-500 dark:text-gray-400 transition-all duration-500 ${
+              isVisible
+                ? "opacity-100 transform-none"
+                : "opacity-0 translate-y-4"
+            }`}
+            style={{ transitionDelay: "600ms" }}
+          >
+            <span>{t("designedBy")}</span>
+            <Heart className="w-3 h-3 text-portfolio-purple mx-1 animate-pulse" />
+          </div>
+
+          {/* Botón scroll arriba */}
+          <button
+            onClick={scrollToTop}
+            className="mt-6 w-10 h-10 rounded-full bg-portfolio-purple/10 flex items-center justify-center text-portfolio-purple transition-all duration-500 hover:bg-portfolio-purple hover:text-white hover:-translate-y-1 focus:outline-none"
+            aria-label="Scroll to top"
+          >
+            <MoveUp className="w-5 h-5" />
+          </button>
+        </div>
+      </div>
+    </footer>
+  );
+};
+
+export default Footer;
+
+{
+  /*const Footer = () => {
   const { t } = useLanguage();
   const currentYear = new Date().getFullYear();
   const [isVisible, setIsVisible] = useState(false);
@@ -21,8 +163,10 @@ const Footer = () => {
 
   return (
     <footer className="bg-white dark:bg-portfolio-deep-blue py-12 border-t border-gray-200 dark:border-gray-800 relative overflow-hidden">
-      {/* Animated background elements */}
-      <div className="absolute -top-24 left-1/4 w-40 h-40 rounded-full bg-portfolio-purple/5 blur-2xl"></div>
+      {/* Animated background elements */
+}
+{
+  /*<div className="absolute -top-24 left-1/4 w-40 h-40 rounded-full bg-portfolio-purple/5 blur-2xl"></div>
       <div className="absolute -bottom-20 right-1/4 w-60 h-60 rounded-full bg-portfolio-purple/10 blur-3xl"></div>
       
       <div className="container mx-auto px-4 relative z-10">
@@ -72,4 +216,5 @@ const Footer = () => {
   );
 };
 
-export default Footer;
+export default Footer;*/
+}
