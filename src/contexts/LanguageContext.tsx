@@ -10,6 +10,10 @@ type LanguageContextType = {
 
 const translations = {
   es: {
+    successTitle: "Mensaje enviado",
+    successMessage: "Gracias por contactarme. Te responderé pronto.",
+    errorTitle: "Error",
+    errorMessage: "No se pudo enviar el mensaje. Inténtalo más tarde.",
     // Navbar
     home: "Inicio",
     about: "Sobre mí",
